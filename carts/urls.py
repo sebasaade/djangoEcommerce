@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^checkout/success/$', checkout_done_view, name='success'),
     url(r'^checkout/$', checkout_home, name='checkout'),
     url(r'^update/$', cart_update, name='update'),
-
 ]

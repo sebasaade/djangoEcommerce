@@ -21,17 +21,19 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
 
-from accounts.views import login_page,register_page, guest_register_view
+from accounts.views import LoginView, RegisterView, guest_register_view
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
 from billing.views import payment_method_view, payment_method_createview
 from carts.views import cart_detail_api_web
+from marketing.views import MarketingPreferenceUpdateView, MailchimpWebhookView
+
 from .views import home_page, about_page, contact_page
 
 urlpatterns = [
     url(r'^$', home_page, name='home'),
     url(r'^about/$', about_page, name='about'),
     url(r'^contact/$', contact_page, name='contact'),
-    url(r'^login/$', login_page, name='login'),
+    url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^checkout/address/create/$', checkout_address_create_view, name='checkout_address_create'),
     url(r'^checkout/address/reuse/$', checkout_address_reuse_view, name='checkout_address_reuse'),
     url(r'^register/guest/$', guest_register_view, name='guest_register'),
@@ -40,10 +42,12 @@ urlpatterns = [
     url(r'^cart/', include("carts.urls", namespace='cart')),
     url(r'^billing/payment-method/$', payment_method_view, name='billing-payment-method'),
     url(r'^billing/payment-method/create/$', payment_method_createview, name='billing-payment-method-api'),
-    url(r'^register/$', register_page, name='register'),
+    url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
     url(r'^products/', include("products.urls", namespace='products')),
     url(r'^search/', include("search.urls", namespace='search')),
+    url(r'^settings/email/$', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
+    url(r'^webhooks/mailchimp/$', MailchimpWebhookView.as_view(), name='webhooks-mailchimp'),
     url(r'^admin/', admin.site.urls),
 ]
 

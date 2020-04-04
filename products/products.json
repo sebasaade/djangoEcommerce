@@ -1,0 +1,72 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "T-shirt",
+        "slug": "t-shirt",
+        "description": "awesome!!",
+        "price": "39.99",
+        "image": "",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-09-24T14:42:54.063Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "New York Hat",
+        "slug": "new-york-hat-aotv",
+        "description": "This is my awesome hat. buy it :)",
+        "price": "39.99",
+        "image": "products/NYhat.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-09-24T14:42:54.063Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "supercomputer",
+        "slug": "supercomputer-ooq5",
+        "description": "yeah",
+        "price": "59.99",
+        "image": "",
+        "featured": true,
+        "active": true,
+        "timestamp": "2019-09-24T14:42:54.063Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "T-shirt",
+        "slug": "t-shirt-b661",
+        "description": "other t-shirt",
+        "price": "39.99",
+        "image": "",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-09-24T14:42:54.063Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "Lorem Ipsum",
+        "slug": "lorem-ipsum",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum ultrices pharetra. Nullam suscipit pellentesque velit, vitae pretium tellus imperdiet sit amet. Maecenas ornare lacinia mauris a ornare. Integer id urna placerat est faucibus pharetra. Integer at arcu sem. Curabitur vel turpis orci. Aenean vitae placerat lectus, et ultricies quam. Maecenas porttitor, dolor non sollicitudin efficitur, nulla lorem dignissim purus, vitae lacinia augue massa vel elit.\r\n\r\nIn nec fermentum justo. Aliquam augue ante, faucibus eget finibus eget, ullamcorper non risus. In quis lobortis dolor, a consequat dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris placerat tempus lobortis. Morbi vel semper nulla. Duis ornare eros sit amet velit vestibulum, eu tempor enim ultricies. Vestibulum congue dolor ac urna laoreet aliquam. Pellentesque suscipit elementum euismod. Donec vel erat porta, auctor risus eget, euismod dolor. Duis id nisi vel massa tincidunt hendrerit at et sem. Duis non dui at massa placerat fermentum sit amet sit amet erat. Aenean id risus sapien. Donec elementum velit vel libero tincidunt mollis.\r\n\r\nCurabitur semper ipsum in lectus pulvinar, quis vestibulum dui vulputate. Duis turpis elit, rutrum et hendrerit ut, venenatis in lorem. Mauris dapibus pretium euismod. Cras auctor maximus justo, a tristique lacus vulputate quis. Cras a sapien condimentum quam facilisis tristique ut eu est. Quisque aliquet ut diam ac tincidunt. Aenean eu risus elit. Proin nec neque sed augue imperdiet malesuada. Phasellus porttitor eros neque, porttitor dapibus lorem tincidunt vitae. Cras malesuada mattis nisi eget placerat. Sed ut blandit nulla. Sed ac feugiat quam, in eleifend felis.\r\n\r\nEtiam a risus neque. Fusce facilisis lectus id neque laoreet, quis pulvinar sapien lobortis. Praesent congue, nisl ac tincidunt rutrum, erat nibh fringilla lacus, in pharetra tortor massa iaculis nisl. Mauris a blandit quam. Donec eu porta lorem, vitae convallis nibh. Praesent quis aliquam erat, at laoreet ante. Sed ullamcorper, arcu sed tincidunt tempus, sapien nisi congue urna, eu sagittis ipsum arcu eu dui. Nullam aliquam metus at mi maximus gravida.\r\n\r\nIn hac habitasse platea dictumst. Nam aliquam, nibh ut dignissim consectetur, massa risus consectetur neque, at tempus tortor quam et orci. Nulla iaculis imperdiet facilisis. Mauris eleifend libero mauris, id dignissim tellus lobortis auctor. Phasellus scelerisque egestas nibh id interdum. Proin mollis metus ligula, vel pharetra massa pretium tristique. Cras ac dui magna. Ut sit amet leo placerat, rutrum libero sit amet, imperdiet diam. Etiam ut pharetra massa. Etiam id ex cursus, ullamcorper ligula quis, consequat dolor. Sed accumsan magna non velit tincidunt tristique. Phasellus vehicula elit sit amet enim lacinia lobortis. Nunc vel commodo augue. Morbi a lorem mollis, scelerisque mauris feugiat, lacinia urna.",
+        "price": "39.99",
+        "image": "",
+        "featured": true,
+        "active": true,
+        "timestamp": "2019-09-24T14:42:54.063Z"
+    }
+}
+]
