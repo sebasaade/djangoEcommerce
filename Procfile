@@ -1,1 +1,1 @@
-web gurnicorn ecommerce.wsgi
+web gurnicorn ecommerce.wsgi:application
