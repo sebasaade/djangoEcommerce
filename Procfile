@@ -1,1 +1,1 @@
-web gurnicorn ecommerce.wsgi:application $port
+web: gunicorn ecommerce.wsgi --log-file -
