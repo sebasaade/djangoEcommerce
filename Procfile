@@ -1,1 +1,1 @@
-web gurnicorn ecommerce.wsgi:application
+web gurnicorn ecommerce.wsgi:application $port
