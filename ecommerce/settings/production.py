@@ -25,7 +25,7 @@ SECRET_KEY = '6)&0sjkb@r70qh1+8wx&-d964^ct63%h6yli!srenfnw)!$w*u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['sebasaade-ecommerce.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 
 # Application definition
