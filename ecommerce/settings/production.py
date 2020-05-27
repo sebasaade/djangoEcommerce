@@ -37,7 +37,7 @@ MANAGERS = (
 ADMINS = MANAGERS
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = false
 
 ALLOWED_HOSTS = ['sebasaade-ecommerce.herokuapp.com']
 
