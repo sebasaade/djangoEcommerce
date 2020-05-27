@@ -62,7 +62,7 @@ class ProductDetailSlugView(ObjectViewedMixin, DetailView):
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
-        object_viewed_signal.send()
+        #object_viewed_signal.send()
         #instance = get_object_or_404(Product, slug=slug, active=True)
         try:
             instance = Product.objects.get(slug=slug,active=True)
