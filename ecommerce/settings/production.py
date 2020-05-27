@@ -39,7 +39,7 @@ ADMINS = MANAGERS
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.pythonecommerce.com']
+ALLOWED_HOSTS = ['sebasaade-ecommerce.heroku.app.com']
 
 
 # Application definition
