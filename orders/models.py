@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save, post_save
 from addresses.models import Address
 from billing.models import BillingProfile
 from carts.models import Cart
-from ecommerce.utils import unique_order_id_generator 
+from ecommerce.utils import unique_key_generator
 
 ORDER_STATUS_CHOICES = (
     ('created', 'Created'),
@@ -15,7 +15,7 @@ ORDER_STATUS_CHOICES = (
 )
 
 class OrderManager(models.Manager):
-    def new_or_get(self, billing_profile, cart_obj):                
+    def new_or_get(self, billing_profile, cart_obj):
         created = False
         qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True, status='created')
         if qs.count() == 1:
@@ -41,9 +41,9 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_id
-    
+
     objects = OrderManager()
-    
+
     def update_total(self):
         cart_total = self.cart.total
         shipping_total = self.shipping_total
@@ -68,19 +68,14 @@ class Order(models.Model):
             self.save()
         return self.status
 
-
-    
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_id_generator(instance)
-        
     qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile = instance.billing_profile)
     if qs.exists():
         qs.update(active=False)
 
 pre_save.connect(pre_save_create_order_id, sender=Order)
-
-
 
 def post_save_cart_total(sender, instance, created, *args, **kwargs):
     if not created:

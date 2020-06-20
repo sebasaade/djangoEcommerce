@@ -28,6 +28,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Python ecommerce <sebasaade@gmail.com>'
+BASE_URL= 'https://sebasaade-ecommerce.herokuapp.com/'
 
 
 MANAGERS = (
@@ -39,7 +40,7 @@ ADMINS = MANAGERS
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['sebasaade-ecommerce.herokuapp.com']
 
 
 # Application definition
