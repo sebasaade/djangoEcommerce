@@ -43,7 +43,7 @@ ADMINS = MANAGERS
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['sebasaade-ecommerce.herokuapp.com']
+ALLOWED_HOSTS = ['sebasaade-ecommerce.herokuapp.com', 'localhost']
 
 
 # Application definition

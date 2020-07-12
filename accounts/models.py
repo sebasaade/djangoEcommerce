@@ -1,6 +1,8 @@
 from datetime import timedelta
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager
@@ -109,11 +111,19 @@ class EmailActivationQuerySet(models.query.QuerySet):
 
 
 class EmailActivationManager(models.Manager):
-    def get_querySet(self):
+    def get_queryset(self):
         return EmailActivationQuerySet(self.model, using=self._db)
 
     def confirmable(self):
         return self.get_queryset().confirmable()
+
+    def email_exists(self, email):
+        return self.get_queryset().filter(
+                Q(email=email) |
+                Q(user__email=email)
+            ).filter(
+                activated=False
+            )
 
 class EmailActivation(models.Model):
     user = models.ForeignKey(User)
@@ -159,7 +169,7 @@ class EmailActivation(models.Model):
         if not self.activated and not self.forced_expired:
             if self.key:
                 base_url= getattr(settings, 'BASE_URL', 'https://sebasaade-ecommerce.herokuapp.com/')
-                key_path= self.key #use reverse
+                key_path= reverse("account:email-activate", kwargs={'key':self.key}) #use reverse
                 path= "{base}{path}".format(base=base_url, path=key_path)
                 context = {
                     'path': path,
@@ -169,16 +179,18 @@ class EmailActivation(models.Model):
                 html_= get_template("registration/emails/verify.html").render(context)
                 subject= '1-Click Email Verification'
                 from_email= settings.DEFAULT_FROM_EMAIL
-                recipient_list= [self.email, from_email]
+                recipient_list= [self.email]
                 sent_mail= send_mail(
                             subject,
                             txt_,
                             from_email,
                             recipient_list,
                             html_message= html_,
-                            fail_silently=False,)
+                            fail_silently=False,
+                            )
                 return sent_mail
             return False
+
 
 def pre_save_email_activation(sender, instance, *args, **kwargs):
     if not instance.activated and not instance.forced_expired:
@@ -187,12 +199,14 @@ def pre_save_email_activation(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_email_activation, sender=EmailActivation)
 
+
 def post_save_user_create_receiver(sender, instance, created, *args, **kwargs):
     if created:
         obj= EmailActivation.objects.create(user=instance, email=instance.email)
         obj.send_activation()
 
 post_save.connect(post_save_user_create_receiver, sender=User)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
