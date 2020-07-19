@@ -10,7 +10,6 @@ from .models import EmailActivation, GuestEmail
 
 class ReactivateEmailForm(forms.Form):
     email = forms.EmailField()
-    
     def clean_email(self):
         email = self.cleaned_data.get('email')
         qs = EmailActivation.objects.email_exists(email)
@@ -50,6 +49,13 @@ class UserAdminCreationForm(forms.ModelForm):
             user.save()
         return user
 
+
+class UserDetailChangeForm(forms.ModelForm):
+    full_name = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={"class": 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['full_name']
 
 class UserAdminChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on

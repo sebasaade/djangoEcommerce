@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
 
 import stripe
-STRIPE_SECRET_KEY = getattr(settings, "STRIPE_SECRET_KEY","sk_test_wTb9XJsp9liBWK9IkvZgWbSH002h6jK919")
-STRIPE_PUB_KEY = getattr(settings, "STRIPE_PUB_KEY","pk_test_yyXzNMv21Q2zBhLkFIATOO8y00Ed3O8Man")
+STRIPE_SECRET_KEY = "sk_test_wTb9XJsp9liBWK9IkvZgWbSH002h6jK919"
+STRIPE_PUB_KEY = "pk_test_yyXzNMv21Q2zBhLkFIATOO8y00Ed3O8Man"
 stripe.api_key = STRIPE_SECRET_KEY
 
 
@@ -16,7 +16,6 @@ def payment_method_view(request):
     #if request.user.is_authenticated():
     #    billing_profile = request.user.BillingProfile
     #    my_customer_id = billing_profile.customer_id
-     
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
     if not billing_profile:
         return redirect("/cart")
