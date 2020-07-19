@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.utils import timezone
 
-from ecommerce.utils import random_string_generator, unique_key_generator
+from ecommerce.utils import random_string_generator, unique_key_generator, unique_order_id_generator
 #send_mail(subject, message, from_email, recipient_list, html_message)
 
 DEFAULT_ACTIVATION_DAYS= getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)

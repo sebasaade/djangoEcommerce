@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save, post_save
 from addresses.models import Address
 from billing.models import BillingProfile
 from carts.models import Cart
-from ecommerce.utils import unique_key_generator
+from ecommerce.utils import unique_order_id_generator
 
 ORDER_STATUS_CHOICES = (
     ('created', 'Created'),
@@ -36,7 +36,7 @@ class Order(models.Model):
     cart                = models.ForeignKey(Cart)
     status              = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     shipping_total      = models.DecimalField(default=5.99, max_digits=100, decimal_places=2)
-    total         = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    total               = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     active              = models.BooleanField(default=True, )
 
     def __str__(self):

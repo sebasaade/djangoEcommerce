@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
 from django.utils.safestring import mark_safe
 
+from ecommerce.mixins import NextUrlMixin, RequestFormAttachMixin
 from .forms import LoginForm, RegisterForm, GuestForm, ReactivateEmailForm
 from .models import GuestEmail, EmailActivation
 from .signals import user_logged_in
@@ -66,7 +67,7 @@ class AccountEmailActivateView(FormMixin, View):
         messages.success(request, msg)
         email = form.cleaned_data.get("email")
         obj = EmailActivation.objects.email_exists(email).first()
-        user = obj.user 
+        user = obj.user
         new_activation = EmailActivation.objects.create(user=user, email=email)
         new_activation.send_activation()
         return super(AccountEmailActivateView, self).form_valid(form)
@@ -75,55 +76,25 @@ class AccountEmailActivateView(FormMixin, View):
         context = {'form': form, "key": self.key }
         return render(self.request, 'registration/activation-error.html', context)
 
-def guest_register_view(request):
-    form = GuestForm(request.POST or None)
-    context = {
-        "form": form
-    }
-    next_ = request.GET.get('next')
-    next_post = request.POST.get('next')
-    redirect_path = next_ or next_post or None
-    if form.is_valid():
-        email = form.cleaned_data.get("email")
-        new_guest_email = GuestEmail.objects.create(email=email)
-        request.session['guest_email_id'] = new_guest_email.id
-        if is_safe_url(redirect_path, request.get_host()):
-            return redirect(redirect_path)
-        else:
-            return redirect("/register/")
-    return redirect("/register/")
+class GuestRegisterView(NextUrlMixin, RequestFormAttachMixin, CreateView):
+    form_class = GuestForm
+    default_next = '/register/'
 
+    def get_success_url(self):
+        return self.get_next_url()
+        
+    def form_invalid(self, form):
+        return redirect(self.default_next)
 
-class LoginView(FormView):
+class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     form_class = LoginForm
     success_url = '/'
     template_name = 'accounts/login.html'
+    default_next = '/'
 
     def form_valid(self, form):
-        request = self.request
-        next_ = request.GET.get('next')
-        next_post = request.POST.get('next')
-        redirect_path = next_ or next_post or None
-
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
-            if not user.is_active:
-                messages.error(request, "This user is inactive")
-                return super(LoginView, self).form_invalid(form)
-            login(request, user)
-            user_logged_in.send(user.__class__, instance=user, request=request)
-            try:
-                del request.session['guest_email_id']
-            except:
-                pass
-            if is_safe_url(redirect_path, request.get_host()):
-                return redirect(redirect_path)
-            else:
-                return redirect("/")
-        return super(LoginView, self).form_invalid(form)
-
+        next_path = self.get_next_url()
+        return redirect(next_path)
 
 # def login_page(request):
 #    form = LoginForm(request.POST or None)
